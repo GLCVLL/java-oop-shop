@@ -63,13 +63,34 @@ public class Prodotto {
 
     // METODO PER IL NOME
     public String getExtendedName() {
-        return code + "-" + name;
+        return generatedPaddedCode() + "-" + name;
     }
 
     // METODO PER CODICE
     private int generateRandomCode() {
         Random rnd = new Random();
-        return rnd.nextInt(101);
+        return rnd.nextInt(10000000);
+    }
+    
+    // METODO PER IL CODICE CON 0
+    
+    private String generatedPaddedCode(){
+    	String codeString = String.valueOf(generateRandomCode());
+    	
+    	int z = 8 - codeString.length();
+    	
+        if (z > 0) {
+            String paddedCode = "";
+            for (int i = 0; i < z; i++) {
+                paddedCode = paddedCode + '0';
+            }
+            paddedCode = paddedCode + codeString;
+
+            return paddedCode;
+        } else {
+            // Se la lunghezza è già di 8 cifre, restituisci il codice originale
+            return codeString;
+        }
     }
     
     @Override
